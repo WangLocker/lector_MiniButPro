@@ -132,17 +132,14 @@ class SettingsUI(QtWidgets.QDialog, settingswindow.Ui_Dialog):
         switches_string = self._translate('SettingsUI', 'Switches')
         annotations_string = self._translate('SettingsUI', 'Annotations')
         about_string = self._translate('SettingsUI', 'About')
-        connect_string = self._translate('SettingsUI', 'Connect')
         list_options = [
-            library_string, switches_string, annotations_string, about_string, connect_string]
+            library_string, switches_string, annotations_string, about_string]
 
         icon_dict = {
             0: 'view-readermode',
             1: 'switches',
             2: 'annotate',
-            3: 'about',
-            4: 'format-line-spacing-double'
-        }
+            3: 'about'}
 
         for count, i in enumerate(list_options):
             item = QtGui.QStandardItem()
@@ -207,9 +204,7 @@ class SettingsUI(QtWidgets.QDialog, settingswindow.Ui_Dialog):
 
         valid_buttons = {
             0: (self.okButton,),
-            3: (self.resetButton, self.clearLogButton),
-            4: (self.conectButton, self.downloadButton)
-        }
+            3: (self.resetButton, self.clearLogButton),}
 
         for i in valid_buttons:
             if i == switch_to:

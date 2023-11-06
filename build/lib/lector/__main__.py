@@ -157,8 +157,6 @@ class MainUI(QtWidgets.QMainWindow, mainwindow.Ui_MainWindow):
             lambda: self.show_settings(0))
         self.libraryToolBar.aboutButton.triggered.connect(
             lambda: self.show_settings(3))
-        self.libraryToolBar.connectButton.triggered.connect(
-            lambda: self.show_settings(4))
         self.libraryToolBar.searchBar.textChanged.connect(self.lib_ref.update_proxymodels)
         self.libraryToolBar.sortingBox.activated.connect(self.lib_ref.update_proxymodels)
         self.libraryToolBar.libraryFilterButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
