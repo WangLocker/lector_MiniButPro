@@ -4,6 +4,8 @@ import sys
 import hashlib
 import pathlib
 
+
+
 install_dir = os.path.realpath(__file__)
 install_dir = pathlib.Path(install_dir).parents[1]
 sys.path.append(str(install_dir))
@@ -22,7 +24,7 @@ from lector import sorter
 from lector.toolbars import LibraryToolBar, BookToolBar
 from lector.widgets import Tab, DragDropListView, DragDropTableView
 from lector.delegates import LibraryDelegate
-from lector.threaded import BackGroundTabUpdate, BackGroundBookAddition, BackGroundBookDeletion
+from lector.threaded import BackGroundTabUpdate, BackGroundBookAddition, BackGroundBookDeletion, BackGroundImageChoose
 from lector.library import Library
 from lector.guifunctions import QImageFactory, CoverLoadingAndCulling, ViewProfileModification
 from lector.settings import Settings
@@ -39,7 +41,7 @@ class MainUI(QtWidgets.QMainWindow, mainwindow.Ui_MainWindow):
 
         # Set window icon
         self.setWindowIcon(
-            QtGui.QIcon(':/images/Lector.png'))
+            QtGui.QIcon('resources/raw/Megumi.png'))
 
         # Central Widget - Make borders disappear
         self.centralWidget().layout().setContentsMargins(0, 0, 0, 0)
@@ -150,7 +152,7 @@ class MainUI(QtWidgets.QMainWindow, mainwindow.Ui_MainWindow):
         self.libraryToolBar.tableViewButton.triggered.connect(self.switch_library_view)
         self.libraryToolBar.reloadLibraryButton.triggered.connect(
             self.settingsDialog.start_library_scan)
-        self.libraryToolBar.colorButton.triggered.connect(self.get_color)
+        self.libraryToolBar.colorButton.triggered.connect(self.choose_bgimage)
         self.libraryToolBar.settingsButton.triggered.connect(
             lambda: self.show_settings(0))
         self.libraryToolBar.aboutButton.triggered.connect(
@@ -271,10 +273,8 @@ class MainUI(QtWidgets.QMainWindow, mainwindow.Ui_MainWindow):
         self.listView.verticalScrollBar().valueChanged.connect(self.start_culling_timer)
         self.listView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.listView.setAcceptDrops(True)
-
         self.listView.setStyleSheet(
-            "QListView {{background-color: {0}}}".format(
-                self.settings['listview_background'].name()))
+            "#listView{border-image:url(resources/raw/BackgroundImage/BI.png)}")
 
         # TODO
         # Maybe use this for readjusting the border of the focus rectangle
@@ -459,6 +459,7 @@ class MainUI(QtWidgets.QMainWindow, mainwindow.Ui_MainWindow):
             self, dialog_prompt, self.settings['last_open_path'],
             f'{ebooks_string}({self.available_parsers})')
 
+
         if not opened_files[0]:
             return
 
@@ -471,6 +472,25 @@ class MainUI(QtWidgets.QMainWindow, mainwindow.Ui_MainWindow):
         self.statusMessage.setText(self._translate('Main_UI', 'Adding books...'))
         self.thread = BackGroundBookAddition(
             opened_files[0], self.database_path, 'manual', self)
+        self.thread.finished.connect(
+            lambda: self.move_on(self.thread.errors))
+        self.thread.start()
+
+    def choose_bgimage(self):
+        dialog_prompt = self._translate('Main_UI', 'Choose the background image')
+        opened_files = QtWidgets.QFileDialog.getOpenFileName(self, dialog_prompt, self.settings['last_open_path'],
+                                                             "Images (*.png)")
+
+        if not opened_files[0]:
+                return
+
+        self.settingsDialog.okButton.setEnabled(False)
+        self.libraryToolBar.reloadLibraryButton.setEnabled(False)
+
+        self.settings['last_open_path'] = os.path.dirname(opened_files[0][0])
+
+        self.thread = BackGroundImageChoose(
+            opened_files[0], self)
         self.thread.finished.connect(
             lambda: self.move_on(self.thread.errors))
         self.thread.start()

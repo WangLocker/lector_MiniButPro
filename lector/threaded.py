@@ -38,6 +38,8 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
+import shutil
+import os
 
 class BackGroundTabUpdate(QtCore.QThread):
     def __init__(self, database_path, all_metadata, parent=None):
@@ -85,6 +87,28 @@ class BackGroundBookAddition(QtCore.QThread):
 
         if self.prune_required:
             self.main_window.lib_ref.prune_models(self.file_list)
+
+class BackGroundImageChoose(QtCore.QThread):
+    def __init__(self, file_list, main_window, parent=None):
+        super(BackGroundImageChoose, self).__init__(parent)
+        self.file_list = file_list
+        self.main_window = main_window
+        self.errors = []
+
+    def run(self):
+
+        self.main_window.listView.setStyleSheet(
+            "#listView{{border-image:url({})}}".format(self.file_list))
+
+        tmp=os.listdir(os.getcwd()+"/resources/raw/BackgroundImage/")
+        for i in tmp:
+            os.remove("resources/raw/BackgroundImage/"+i)
+        shutil.copy(self.file_list, "resources/raw/BackgroundImage/")
+
+        tmp = os.listdir(os.getcwd() + "/resources/raw/BackgroundImage/")
+        os.rename("resources/raw/BackgroundImage/"+tmp[0],"resources/raw/BackgroundImage/BI.png")
+
+
 
 
 class BackGroundBookDeletion(QtCore.QThread):
