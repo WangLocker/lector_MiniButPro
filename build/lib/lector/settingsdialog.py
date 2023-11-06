@@ -205,6 +205,8 @@ class SettingsUI(QtWidgets.QDialog, settingswindow.Ui_Dialog):
         # 获取 input1 和 input2 中的文本内容
         server_address = self.input1.text()
         download_address = self.input2.text()
+        print(server_address)
+        print(download_address)
         # TODO
         # 在此处完成连接下载的逻辑即可
 
