@@ -201,6 +201,14 @@ class SettingsUI(QtWidgets.QDialog, settingswindow.Ui_Dialog):
         self.tabWidget.setContentsMargins(0, 0, 0, 0)
         self.tabWidget.tabBar().setVisible(False)
 
+
+    def delete_database(self):
+        server_address = self.label1.text()
+        download_address = self.label2.text()
+        print(server_address)
+        print(download_address)
+
+
     def list_index_changed(self, index):
         switch_to = index.row()
         self.stackedWidget.setCurrentIndex(switch_to)
