@@ -195,6 +195,9 @@ class SettingsUI(QtWidgets.QDialog, settingswindow.Ui_Dialog):
         self.resetButton.clicked.connect(self.delete_database)
         self.clearLogButton.clicked.connect(self.clear_log)
 
+        # Download button
+        self.downloadButton.clicked.connect(self.connect_dowmload)
+
         # Hide the image annotation tab
         # TODO
         # Maybe get off your lazy ass and write something for this
@@ -202,11 +205,13 @@ class SettingsUI(QtWidgets.QDialog, settingswindow.Ui_Dialog):
         self.tabWidget.tabBar().setVisible(False)
 
 
-    def delete_database(self):
-        server_address = self.label1.text()
-        download_address = self.label2.text()
+    def connect_dowmload(self):
+        server_address = self.input1.text()
+        download_address = self.input2.text()
         print(server_address)
         print(download_address)
+        self.input1.setText(download_address)
+        self.input2.setText(server_address)
 
 
     def list_index_changed(self, index):
