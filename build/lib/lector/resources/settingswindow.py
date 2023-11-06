@@ -347,42 +347,6 @@ class Ui_Dialog(object):
         self.aboutTabWidget.addTab(self.logTab, "")
         self.gridLayout_9.addWidget(self.aboutTabWidget, 0, 0, 1, 1)
         self.stackedWidget.addWidget(self.aboutPage)
-
-        self.connectPage = QtWidgets.QWidget()
-        self.connectPage.setObjectName("connectPage")
-        self.gridLayout_10 = QtWidgets.QGridLayout(self.connectPage)
-        self.gridLayout_10.setObjectName("gridLayout_10")
-
-        # Create the main widget
-        self.connectPage = QtWidgets.QWidget()
-        self.gridLayout_10 = QtWidgets.QGridLayout(self.connectPage)
-        self.gridLayout_10.setObjectName("gridLayout_10")
-
-        # Create a widget to hold the horizontal layouts
-        self.mainWidget = QtWidgets.QWidget()
-        self.mainLayout = QtWidgets.QVBoxLayout(self.mainWidget)
-
-        # Text Label 1 and Text Input 1 in Horizontal Layout
-        self.hbox_layout1 = QtWidgets.QHBoxLayout()
-        self.label1 = QtWidgets.QLabel("服务器地址：")
-        self.input1 = QtWidgets.QLineEdit()
-        self.hbox_layout1.addWidget(self.label1)
-        self.hbox_layout1.addWidget(self.input1)
-        self.mainLayout.addLayout(self.hbox_layout1)
-
-        # Text Label 2 and Text Input 2 in Horizontal Layout
-        self.hbox_layout2 = QtWidgets.QHBoxLayout()
-        self.label2 = QtWidgets.QLabel("本地下载路径：")
-        self.input2 = QtWidgets.QLineEdit()
-        self.hbox_layout2.addWidget(self.label2)
-        self.hbox_layout2.addWidget(self.input2)
-        self.mainLayout.addLayout(self.hbox_layout2)
-
-        # Add the main widget to the grid layout
-        self.gridLayout_10.addWidget(self.mainWidget)
-        self.stackedWidget.addWidget(self.connectPage)
-
-
         self.verticalLayout_4.addWidget(self.stackedWidget)
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
@@ -392,13 +356,6 @@ class Ui_Dialog(object):
         self.clearLogButton = QtWidgets.QPushButton(Dialog)
         self.clearLogButton.setObjectName("clearLogButton")
         self.horizontalLayout_10.addWidget(self.clearLogButton)
-
-        self.conectButton = QtWidgets.QPushButton(Dialog)
-        self.conectButton.setObjectName("conectButton")
-        self.horizontalLayout_10.addWidget(self.conectButton)
-        self.downloadButton = QtWidgets.QPushButton(Dialog)
-        self.downloadButton.setObjectName("downloadButton")
-        self.horizontalLayout_10.addWidget(self.downloadButton)
         spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_10.addItem(spacerItem8)
         self.okButton = QtWidgets.QPushButton(Dialog)
@@ -461,8 +418,6 @@ class Ui_Dialog(object):
         self.aboutTabWidget.setTabText(self.aboutTabWidget.indexOf(self.logTab), _translate("Dialog", "Log"))
         self.resetButton.setText(_translate("Dialog", "Reset Application"))
         self.clearLogButton.setText(_translate("Dialog", "Clear Log"))
-        self.conectButton.setText(_translate("Dialog", "Connect"))
-        self.downloadButton.setText(_translate("Dialog", "Download"))
         self.okButton.setText(_translate("Dialog", "Scan Library"))
         self.cancelButton.setText(_translate("Dialog", "Close"))
 

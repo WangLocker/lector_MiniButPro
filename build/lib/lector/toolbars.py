@@ -446,11 +446,6 @@ class LibraryToolBar(QtWidgets.QToolBar):
             self._translate('LibraryToolBar', 'About'),
             self)
 
-        self.connectButton = QtWidgets.QAction(
-            image_factory.get_image('format-line-spacing-double'),
-            self._translate('LibraryToolBar', 'connect'),
-            self)
-
         # Auto unchecks the other QToolButton in case of clicking
         self.viewButtons = QtWidgets.QActionGroup(self)
         self.viewButtons.setExclusive(True)
@@ -470,7 +465,6 @@ class LibraryToolBar(QtWidgets.QToolBar):
         self.addAction(self.colorButton)
         self.addAction(self.settingsButton)
         self.addAction(self.aboutButton)
-        self.addAction(self.connectButton)
 
         # Filter
         sizePolicy = QtWidgets.QSizePolicy(
