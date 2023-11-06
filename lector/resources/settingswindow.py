@@ -393,6 +393,9 @@ class Ui_Dialog(object):
         self.clearLogButton.setObjectName("clearLogButton")
         self.horizontalLayout_10.addWidget(self.clearLogButton)
 
+        self.conectButton = QtWidgets.QPushButton(Dialog)
+        self.conectButton.setObjectName("conectButton")
+        self.horizontalLayout_10.addWidget(self.conectButton)
         self.downloadButton = QtWidgets.QPushButton(Dialog)
         self.downloadButton.setObjectName("downloadButton")
         self.horizontalLayout_10.addWidget(self.downloadButton)
@@ -458,6 +461,7 @@ class Ui_Dialog(object):
         self.aboutTabWidget.setTabText(self.aboutTabWidget.indexOf(self.logTab), _translate("Dialog", "Log"))
         self.resetButton.setText(_translate("Dialog", "Reset Application"))
         self.clearLogButton.setText(_translate("Dialog", "Clear Log"))
+        self.conectButton.setText(_translate("Dialog", "Connect"))
         self.downloadButton.setText(_translate("Dialog", "Download"))
         self.okButton.setText(_translate("Dialog", "Scan Library"))
         self.cancelButton.setText(_translate("Dialog", "Close"))

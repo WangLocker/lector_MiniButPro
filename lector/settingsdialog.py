@@ -208,7 +208,7 @@ class SettingsUI(QtWidgets.QDialog, settingswindow.Ui_Dialog):
         valid_buttons = {
             0: (self.okButton,),
             3: (self.resetButton, self.clearLogButton),
-            4: (self.downloadButton,)
+            4: (self.conectButton, self.downloadButton)
         }
 
         for i in valid_buttons:
