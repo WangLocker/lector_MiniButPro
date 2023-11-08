@@ -21,6 +21,7 @@ import os
 import copy
 import logging
 import pathlib
+import paramiko
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
@@ -210,8 +211,34 @@ class SettingsUI(QtWidgets.QDialog, settingswindow.Ui_Dialog):
         download_address = self.input2.text()
         print(server_address)
         print(download_address)
-        self.input1.setText(download_address)
-        self.input2.setText(server_address)
+        hostname = server_address
+        port = 22
+        username = 'book_cloud'
+        password = '021212555'
+
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname, port, username, password)
+
+        sftp = ssh.open_sftp()
+        file_path=server_address+'/home/book_cloud/books'
+        remote_files = sftp.listdir('/home/book_cloud/books')
+
+        for remote_file in remote_files:
+            remote_file_path = '/home/book_cloud/books' + '/' + remote_file
+            print(remote_file_path)
+            local_file_path = os.path.join(download_address, remote_file)
+            print(local_file_path)
+            sftp.get(remote_file_path, local_file_path)
+            print(f'Downloaded: {remote_file}')
+
+        print(remote_files)
+
+        sftp.close()
+        ssh.close()
+
+        self.input1.setText(server_address)
+        self.input2.setText(download_address)
 
 
     def list_index_changed(self, index):
